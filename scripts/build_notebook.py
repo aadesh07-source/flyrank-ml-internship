@@ -210,7 +210,7 @@ notebook = {
                 "# Train / test split\n",
                 "split_idx = int(0.75 * n_samples)\n",
                 "X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]\n",
-                "y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]\n",
+                "y_train, y_test = y[:split_idx], y[split_idx:]\n",
                 "\n",
                 "# 1. Rule Heuristic Baseline: Score proportional to impressions * (expected_ctr - observed_ctr)\n",
                 "baseline_scores = np.maximum(0, (X_test['expected_ctr'] - X_test['smoothed_ctr'])) * np.log1p(X_test['log_impressions'])\n",
@@ -343,8 +343,34 @@ notebook = {
     "nbformat_minor": 4
 }
 
-out_path = os.path.join(os.getcwd(), "work", "capstone.ipynb")
-with open(out_path, "w", encoding="utf-8") as f:
-    json.dump(notebook, f, indent=2)
+import io
+from contextlib import redirect_stdout
 
-print(f"Successfully generated {out_path} ({os.path.getsize(out_path)} bytes)")
+global_scope = {}
+exec_count = 1
+for cell in notebook["cells"]:
+    if cell["cell_type"] == "code":
+        code_src = "".join(cell["source"])
+        stdout_buf = io.StringIO()
+        cell["outputs"] = []
+        try:
+            with redirect_stdout(stdout_buf):
+                exec(code_src, global_scope)
+            out_text = stdout_buf.getvalue()
+            if out_text:
+                cell["outputs"].append({
+                    "name": "stdout",
+                    "output_type": "stream",
+                    "text": out_text.splitlines(keepends=True)
+                })
+            cell["execution_count"] = exec_count
+            exec_count += 1
+        except Exception as e:
+            print(f"Error executing cell: {e}")
+
+for dir_target in ["work", os.path.join("work", "notebooks")]:
+    os.makedirs(dir_target, exist_ok=True)
+    out_path = os.path.join(os.getcwd(), dir_target, "capstone.ipynb")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(notebook, f, indent=2)
+    print(f"Successfully generated {out_path} ({os.path.getsize(out_path)} bytes)")
