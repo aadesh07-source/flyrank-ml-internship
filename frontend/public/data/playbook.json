@@ -1,0 +1,42 @@
+{
+  "tiers": [
+    {
+      "range": "80-100",
+      "label": "Review now",
+      "description": "High-confidence underperforming opportunity with high search volume"
+    },
+    {
+      "range": "60-79",
+      "label": "Review soon",
+      "description": "Moderate opportunity; secondary review priority"
+    },
+    {
+      "range": "40-59",
+      "label": "Monitor",
+      "description": "Borderline signal; track metrics over the next cycle"
+    },
+    {
+      "range": "0-39",
+      "label": "Low priority",
+      "description": "Healthy CTR relative to position or low search volume"
+    }
+  ],
+  "actions": [
+    {
+      "reason_code": "GOOD_POS_LOW_CTR",
+      "recommended_action": "Title & Snippet Optimization (SERP Click Magnet Review)"
+    },
+    {
+      "reason_code": "HIGH_IMPR_LOW_CTR",
+      "recommended_action": "Meta Description & Search Intent Alignment Review"
+    },
+    {
+      "reason_code": "HIGH_VIS_LOW_ENG",
+      "recommended_action": "Content Depth & UX Engagement Overhaul"
+    },
+    {
+      "reason_code": "DECLINING_CTR",
+      "recommended_action": "SERP Freshness & Competitive SERP Feature Audit"
+    }
+  ]
+}

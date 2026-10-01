@@ -1,0 +1,10 @@
+{
+  "dataset_label": "FlyRank ML Internship Dataset (v1.0)",
+  "feature_window": "2025-02-01 to 2025-03-29 (56 days)",
+  "label_window": "2025-04-06 to 2025-05-04 (28 days)",
+  "gap_days": 7,
+  "pages_before_exclusion": 519606,
+  "pages_after_exclusion": 48250,
+  "model_version": "1.0.0-hgb",
+  "evaluation_split": "Time-aware held-out anchor (2025-05-04)"
+}

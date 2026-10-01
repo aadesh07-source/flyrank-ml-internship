@@ -1,0 +1,26 @@
+{
+  "ml_model": {
+    "pr_auc": 0.4912,
+    "roc_auc": 0.7745,
+    "brier_score": 0.1084,
+    "precision_at_25": 0.84,
+    "precision_at_50": 0.76,
+    "precision_at_100": 0.69,
+    "lift_top_10pct": 2.38,
+    "ndcg_at_25": 0.8821,
+    "ndcg_at_50": 0.8245,
+    "ndcg_at_100": 0.7612
+  },
+  "baseline": {
+    "pr_auc": 0.2864,
+    "roc_auc": 0.612,
+    "brier_score": 0.1742,
+    "precision_at_25": 0.44,
+    "precision_at_50": 0.4,
+    "precision_at_100": 0.38,
+    "lift_top_10pct": 1.29,
+    "ndcg_at_25": 0.521,
+    "ndcg_at_50": 0.493,
+    "ndcg_at_100": 0.461
+  }
+}

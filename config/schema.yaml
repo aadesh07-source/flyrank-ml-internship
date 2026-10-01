@@ -1,0 +1,136 @@
+# schema.yaml — Raw column mapping for the FlyRank ML Internship dataset
+# ✅ CONFIRMED against Hugging Face release on 2026-10-01
+# Pipeline code reads from here; nothing else hard-codes raw column names.
+
+dataset:
+  repo: "FlyRank/internship-warehouse"
+
+tables:
+  # ── Dimension table: content metadata (519,606 rows) ──────────────────────
+  dim_content:
+    hf_path: "hf://datasets/FlyRank/internship-warehouse/dim_content.parquet"
+    columns:
+      # Identifiers
+      client_id: "client_hash_id"
+      content_id: "content_hash_id"        # ← PRIMARY page-level identifier
+      keyword_id: "keyword_hash_id"
+      url_id: "url_hash_id"
+
+      # Content metadata
+      content_type: "content_type"
+      content_created_date: "content_created_date"
+      content_updated_date: "content_updated_date"
+      is_published: "is_published"
+      is_deleted: "is_deleted"
+
+      # Content features
+      word_count: "word_count"
+      char_count: "char_count"
+      url_char_count: "url_char_count"
+
+      # Keyword features
+      keyword_char_count: "keyword_char_count"
+      keyword_token_count: "keyword_token_count"
+      search_volume: "search_volume"
+      competition: "competition"
+      competition_level: "competition_level"
+      cpc: "cpc"
+      main_intent: "main_intent"
+      backlinks: "backlinks"
+      category_count: "category_count"
+
+      # Optimization metadata
+      keyword_created_date: "keyword_created_date"
+      provider_used: "provider_used"
+      model_used: "model_used"
+      last_optimized_date: "last_optimized_date"
+      optimization_eligible_date: "optimization_eligible_date"
+
+  # ── Fact table: daily performance (78,835,655 rows) ────────────────────────
+  # Date range: 2025-01-27 → 2026-06-30 (~17 months)
+  fact_content_daily_performance:
+    hf_path: "hf://datasets/FlyRank/internship-warehouse/fact_content_daily_performance/**/*.parquet"
+    columns:
+      # Keys
+      report_date: "report_date"           # ← DATE, the daily granularity key
+      client_id: "client_hash_id"
+      content_id: "content_hash_id"        # ← JOIN key to dim_content
+
+      # Data availability flags
+      client_has_gsc: "client_has_gsc"
+      client_has_ga4: "client_has_ga4"
+      gsc_data_available: "gsc_data_available"
+      ga4_data_available: "ga4_data_available"
+
+      # GSC search performance (CTR analysis)
+      impressions: "gsc_impressions"
+      clicks: "gsc_clicks"
+      sum_position: "gsc_sum_position"
+      avg_position: "gsc_avg_position"
+
+      # GA4 engagement
+      pageviews: "ga4_pageviews"
+      sessions: "ga4_sessions"
+      users: "ga4_users"
+      engaged_sessions: "ga4_engaged_sessions"
+      total_engagement_sec: "ga4_total_engagement_sec"
+
+      # Traffic source breakdown
+      sessions_organic: "sessions_organic"
+      sessions_direct: "sessions_direct"
+      sessions_referral: "sessions_referral"
+      sessions_social: "sessions_social"
+      sessions_paid: "sessions_paid"
+      sessions_ai: "sessions_ai"
+
+      # AI traffic breakdown
+      ai_chatgpt: "ai_chatgpt"
+      ai_perplexity: "ai_perplexity"
+      ai_gemini: "ai_gemini"
+      ai_copilot: "ai_copilot"
+      ai_claude: "ai_claude"
+      ai_meta: "ai_meta"
+      ai_other: "ai_other"
+
+      # Engagement signals
+      scroll_events: "scroll_events"
+      month: "month"
+
+  # ── Fact table: query-level 90-day rollup (2,414,248 rows) ─────────────────
+  fact_content_query_90d:
+    hf_path: "hf://datasets/FlyRank/internship-warehouse/fact_content_query_90d.parquet"
+    columns:
+      # Keys
+      client_id: "client_hash_id"
+      content_id: "content_hash_id"
+      query_id: "query_hash_id"
+
+      # Query features
+      query_char_count: "query_char_count"
+      query_token_count: "query_token_count"
+
+      # Time window
+      window_start: "window_start"
+      window_end: "window_end"
+
+      # 90-day aggregates
+      impressions_90d: "impressions_90d"
+      clicks_90d: "clicks_90d"
+      avg_position_90d: "avg_position_90d"
+
+      # Last 30d vs previous 30d (trend)
+      impressions_last30: "impressions_last30"
+      clicks_last30: "clicks_last30"
+      avg_position_last30: "avg_position_last30"
+      impressions_prev30: "impressions_prev30"
+      clicks_prev30: "clicks_prev30"
+      avg_position_prev30: "avg_position_prev30"
+
+      # Content-level aggregates
+      content_total_impressions_90d: "content_total_impressions_90d"
+      content_visible_query_count: "content_visible_query_count"
+
+      # Query diversity
+      rare_query_count: "rare_query_count"
+      rare_impressions_share: "rare_impressions_share"
+      anonymized_impressions_share: "anonymized_impressions_share"

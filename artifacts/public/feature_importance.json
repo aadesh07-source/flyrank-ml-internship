@@ -1,0 +1,52 @@
+[
+  {
+    "feature": "ctr_gap",
+    "importance_mean": 0.168,
+    "importance_std": 0.015
+  },
+  {
+    "feature": "ctr_ratio",
+    "importance_mean": 0.134,
+    "importance_std": 0.012
+  },
+  {
+    "feature": "pos_mean",
+    "importance_mean": 0.105,
+    "importance_std": 0.009
+  },
+  {
+    "feature": "ctr_smoothed",
+    "importance_mean": 0.089,
+    "importance_std": 0.008
+  },
+  {
+    "feature": "log_impressions",
+    "importance_mean": 0.076,
+    "importance_std": 0.007
+  },
+  {
+    "feature": "ctr_slope",
+    "importance_mean": 0.062,
+    "importance_std": 0.006
+  },
+  {
+    "feature": "engagement_rate",
+    "importance_mean": 0.054,
+    "importance_std": 0.005
+  },
+  {
+    "feature": "impr_wow_change",
+    "importance_mean": 0.043,
+    "importance_std": 0.004
+  },
+  {
+    "feature": "content_age_days",
+    "importance_mean": 0.037,
+    "importance_std": 0.004
+  },
+  {
+    "feature": "ctr_cv",
+    "importance_mean": 0.031,
+    "importance_std": 0.003
+  }
+]

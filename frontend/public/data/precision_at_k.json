@@ -1,0 +1,16 @@
+{
+  "topk": [
+    25,
+    50,
+    100
+  ],
+  "ml_precision_at_25": 0.84,
+  "baseline_precision_at_25": 0.44,
+  "ml_ndcg_at_25": 0.8821,
+  "ml_precision_at_50": 0.76,
+  "baseline_precision_at_50": 0.4,
+  "ml_ndcg_at_50": 0.8245,
+  "ml_precision_at_100": 0.69,
+  "baseline_precision_at_100": 0.38,
+  "ml_ndcg_at_100": 0.7612
+}

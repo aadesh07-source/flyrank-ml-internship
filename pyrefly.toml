@@ -1,0 +1,12 @@
+search-path = [
+    ".",
+    "backend"
+]
+
+ignore-missing-imports = [
+    "app.*",
+    "pipeline.*"
+]
+
+[errors]
+missing-import = "ignore"

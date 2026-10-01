@@ -1,0 +1,22 @@
+[
+  {
+    "week": "W1",
+    "avg_ctr": 0.0241,
+    "flagged_count": 880
+  },
+  {
+    "week": "W2",
+    "avg_ctr": 0.0245,
+    "flagged_count": 895
+  },
+  {
+    "week": "W3",
+    "avg_ctr": 0.0249,
+    "flagged_count": 870
+  },
+  {
+    "week": "W4",
+    "avg_ctr": 0.0247,
+    "flagged_count": 885
+  }
+]

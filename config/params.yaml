@@ -1,0 +1,43 @@
+# params.yaml — All tuneable parameters for the pipeline.
+# Every pipeline module reads from here; nothing is hard-coded.
+#
+# Dataset date range (confirmed 2026-10-01):
+#   fact_content_daily_performance: 2025-01-27 → 2026-06-30 (~17 months, 520 days)
+#   dim_content:                    2024-10-16 → 2026-07-06
+#   fact_content_query_90d:         single 90-day window snapshot
+
+seed: 42
+
+windows:
+  feature_days: 56          # W_F: feature window length
+  gap_days: 7               # gap between feature and label windows
+  label_days: 28            # W_L: label window length
+  anchor_step_days: 14      # sliding-window step between snapshots
+
+filters:
+  min_impressions_feature: 100   # minimum impressions in W_F to include a page
+  min_impressions_label: 100     # minimum impressions in W_L for labeling
+  min_days_active: 14            # minimum days with impressions in W_F
+
+label:
+  ctr_shortfall_delta: 0.25      # page CTR must be ≥25% below expected to be flagged
+  min_missed_clicks_quantile: 0.75  # missed clicks must exceed this train-set quantile
+
+ctr_smoothing_alpha: 50           # Bayesian shrinkage prior strength
+
+split:
+  cv_folds: 5                    # GroupKFold folds for training
+  test_anchors: 1                # number of latest anchors reserved for test
+
+topk: [25, 50, 100]              # K values for Precision@K, NDCG@K reporting
+
+score:
+  model_weight: 0.7              # weight of p_opportunity in composite score
+  magnitude_weight: 0.3          # weight of normalized expected missed clicks
+
+publish:
+  top_n_recommendations: 100     # max pages in the public ranked table
+
+anonymize:
+  hash_length: 10                # characters in the truncated SHA-256 hash
+  prefix: "P-"                   # prefix for anonymized page IDs
